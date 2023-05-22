@@ -53,7 +53,7 @@
         <div class="container">
 
             <a href="#" class="logo">
-                <img src="./assets/images/logo.png" alt="Homeverse logo">
+                <img src="./assets/images/logo.png" alt="Homeverse logo" width="130px">
                 {{-- <span>TitaResidence</span> --}}
             </a>
 
