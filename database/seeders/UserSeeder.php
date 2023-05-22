@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\House;
+use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole('customer');
         
+        
         House::create([
             'model' => 'Tipe A',
             'price' => 1000000,
@@ -38,5 +40,12 @@ class UserSeeder extends Seeder
             'image' => 'contoh',
             'status' => 'Dijual',
         ]);
+
+        Owner::create([
+            'user_id' => 1,
+            'house_id' => 1,
+            'status' => 'Pemilik',
+        ]);
+        
     }
 }

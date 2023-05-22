@@ -14,7 +14,7 @@
             </div>
 
             <div class="row">
-                <div class="card col-lg-6">
+                <div class="card">
                     <div class="card-body px-0 pb-0">
                         <div class="table-responsive" style="max-height:420px">
                             <table class="table mb-0" id="table1">

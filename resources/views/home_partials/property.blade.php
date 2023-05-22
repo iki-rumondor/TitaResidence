@@ -20,7 +20,7 @@
                         </figure>
                         <div class="card-content">
                             <div class="card-price">
-                                <strong>Rp.1.000.000</strong>/Bulan
+                                <strong>{{ formatCurrency($house->price) }}</strong>/Bulan
                             </div>
                             <h3 class="h3 card-title">{{ $house->model }}</h3>
                             <ul class="card-list">
@@ -46,8 +46,8 @@
                         <div class="card-footer">
                             <div class="card-author">
                                 <div>
-                                    <h4 class="author-name">William Seklo</h4>
-                                    <p class="author-title">Estate Agents</p>
+                                    <h4 class="author-name">{{ $house->owner->user->username }}</h4>
+                                    <p class="author-title">{{ $house->owner->user->phone_num }}</p>
                                 </div>
                             </div>
 
@@ -58,9 +58,15 @@
                                     </a>
                                 @endguest
                                 @role('customer')
-                                    <button class="card-footer-actions-btn confirm-btn" data-id="{{ $house->id }}">
-                                        <ion-icon name="add-circle-outline"></ion-icon>
-                                    </button>
+                                    @if ($house->status == 'Disewakan')
+                                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $house->owner->user->phone_num }}&text=Saya Ingin Menyewa Rumah {{ $house->model }} di TitaResidence" class="card-footer-actions-btn">
+                                            <ion-icon name="add-circle-outline"></ion-icon>
+                                        </a>
+                                    @else
+                                        <button class="card-footer-actions-btn confirm-btn" data-id="{{ $house->id }}">
+                                            <ion-icon name="add-circle-outline"></ion-icon>
+                                        </button>
+                                    @endif
                                 @endrole
                             </div>
                         </div>

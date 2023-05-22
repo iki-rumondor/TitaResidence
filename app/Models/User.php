@@ -50,7 +50,12 @@ class User extends Authenticatable
 
     public function offers()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Offer::class);
+    }
+
+    public function owners()
+    {
+        return $this->hasMany(Owner::class);
     }
 
 }

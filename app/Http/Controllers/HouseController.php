@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\House;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,7 +47,12 @@ class HouseController extends Controller
 
         $validatedData['image'] = $request->file('image')->store('house-image');
         $validatedData['status'] = 'Dijual';
-        House::create($validatedData);
+        $house = House::create($validatedData);
+        Owner::create([
+            'user_id' => 1,
+            'house_id' => $house->id,
+            'status' => 'Pemilik',
+        ]);
 
         return \redirect('/admin/houses')->with('success', 'Berhasil menambahkan data rumah baru');
     }

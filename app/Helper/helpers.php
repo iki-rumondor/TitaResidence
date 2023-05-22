@@ -20,3 +20,9 @@ function formatPhoneNumber($phoneNumber)
 
     return $phoneNumber;
 }
+
+function formatCurrency($amount)
+{
+    $formattedAmount = 'Rp. ' . number_format($amount, 0, ',', '.');
+    return $formattedAmount;
+}

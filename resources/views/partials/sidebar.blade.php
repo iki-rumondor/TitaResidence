@@ -7,16 +7,16 @@
             <ul class="menu">
                 @role('customer')
                     <li class='sidebar-title'>Pelanggan</li>
-                    <li class="sidebar-item {{ Request::is('customer') ? 'active' : '' }}">
-                        <a href="/customer" class='sidebar-link'>
+                    <li class="sidebar-item {{ Request::is('customer/offering') ? 'active' : '' }}">
+                        <a href="/customer/offering" class='sidebar-link'>
                             <i data-feather="send" width="20"></i>
-                            <span>Penawaran Anda</span>
+                            <span>Penawaran Saya</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Request::is('customer/warranty') ? 'active' : '' }}">
-                        <a href="/customer/warranty" class='sidebar-link'>
+                    <li class="sidebar-item {{ Request::is('customer/house') ? 'active' : '' }}">
+                        <a href="/customer/house" class='sidebar-link'>
                             <i data-feather="slack" width="20"></i>
-                            <span>Rumah Anda</span>
+                            <span>Rumah Saya</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ Request::is('customer/warranty') ? 'active' : '' }}">

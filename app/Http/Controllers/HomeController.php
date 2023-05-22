@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'title' => 'HomePage',
-            'houses' => House::all()
+            'houses' => House::where('status', '!=', 'Dibeli')->get()
         ]);
     }
 

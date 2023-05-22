@@ -34,10 +34,9 @@ Route::prefix('customer')->middleware(['role:customer'], 'auth')->group(function
     Route::get('', [HomeController::class, 'index'] );
     Route::get('offering', [CustomerController::class, 'viewOffering'] );
     Route::get('setOffer/{house}', [CustomerController::class, 'setOffer'] );
-    Route::get('warranty', [CustomerController::class, 'viewWarranty'] );
-    Route::get('gallery', [CustomerController::class, 'viewGallery'] );
-    Route::post('order', [CustomerController::class, 'order'] );
-    Route::post('claim-warranty/{order}', [CustomerController::class, 'claimWarranty'] );
+    Route::get('house', [CustomerController::class, 'viewHouse'] );
+    Route::get('rent-out/{owner}', [CustomerController::class, 'rentOut'] );
+    Route::get('cancel-rent/{owner}', [CustomerController::class, 'cancelRent'] );
 });
 
 Route::prefix('admin')->middleware(['role:admin'], 'auth')->group(function () {

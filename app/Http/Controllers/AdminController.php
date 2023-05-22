@@ -23,71 +23,42 @@ class AdminController extends Controller
 
     public function verifyOffer(Offer $offer)
     {
-        Owner::create([
+        
+        $offer->house->owner->update([
             'user_id' => $offer->user->id,
-            'house_id' => $offer->house->id,
-            'status' => $offer->status,
+            'status' => ($offer->status == 'Membeli') ? 'Pemilik' : 'Penyewa',
+        ]);
+
+        $offer->house->update([
+            'status' => 'Dibeli',
         ]);
 
         $offer->delete();
 
-        return back()->with('success', 'Berhasil memverifikasi penawaran');
+        $phone_num = $offer->user->phone_num;
+        $body = 'Penawaran perumahan yang anda ajukan telah kami terima, anda bisa datang langsung ke kantor kami di jalan Kotamobagu,  Kotamobagu Utara.';
+        $response = response('<script>window.open("https://api.whatsapp.com/send?phone=' . $phone_num . '&text=' . $body . '", "_blank");</script>', 200, ['Content-Type', 'text/html']);
+
+        return back()->with('response', $response);
     }
 
     public function denyOffer(Offer $offer)
     {
         $offer->delete();
 
-        return back()->with('success', 'Berhasil membatalkan penawaran');
-    }
-
-    public function denyOrder(Order $order)
-    {
-        $phone_num = $order->user->phone_num;
-        $body = 'Maaf pengajuan permintaan jasa anda belum bisa kami proses.';
+        $phone_num = $offer->user->phone_num;
+        $body = 'Maaf... Penawaran perumahan yang anda ajukan belum dapat kami terima dengan alasan tertentu.';
         $response = response('<script>window.open("https://api.whatsapp.com/send?phone=' . $phone_num . '&text=' . $body . '", "_blank");</script>', 200, ['Content-Type', 'text/html']);
-        $order->update(['status' => 'Tidak Disetujui']);
+
         return back()->with('response', $response);
-    }
-
-    public function finishOrder(Order $order)
-    {
-        $order->update(['status' => 'Selesai']);
-        $orders = $order->user->orders->where('status', 'Selesai')->count();
-
-        if ($orders > 100) {
-            $order->user->update(['level' => 'Pro']);
-        } elseif ($orders > 5) {
-            $order->user->update(['level' => 'Intermediate']);
-        }
-
-        $phone_num = $order->user->phone_num;
-        $body = 'Terimakasih telah menggunakan jasa kami, anda akan mendapatkan garansi iPagar selama 1 bulan, silahkan kunjungi halaman garansi iPagar untuk mengajukan keluhan terhadap pengerjaan jasa yang tim kami kerjakan ';
-        $response = response('<script>window.open("https://api.whatsapp.com/send?phone=' . $phone_num . '&text=' . $body . '", "_blank");</script>', 200, ['Content-Type', 'text/html']);
-
-        return \back()->with('response', $response);
     }
 
     public function viewCustomers()
     {
         return view('customers', [
             'title' => 'Pelanggan iPagar',
-            'customers' => User::all(),
+            'customers' => User::where('username', '!=', 'admin')->get(),
         ]);
     }
 
-    public function viewComplaints()
-    {
-        return view('complaints', [
-            'title' => 'Keluhan Pelanggan iPagar',
-            'complaints' => Complaint::all(),
-        ]);
-    }
-
-    public function finishComplaint(Complaint $complaint)
-    {
-        $complaint->update(['status' => 'Selesai']);
-        $complaint->order->update(['status_warranty' => 'Selesai']);
-        return back()->with('success', 'Keluhan telah diselesaikan');
-    }
 }

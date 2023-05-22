@@ -26,13 +26,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($customers as $customer)
-                                        @if ($customer->username == 'admin')
-                                            @continue
-                                        @endif
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $customer->username }}</td>
                                             <td>{{ $customer->phone_num }}</td>
+                                            <td>{{ $customer->owners->count() }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

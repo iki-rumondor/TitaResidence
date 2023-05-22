@@ -8,11 +8,8 @@
         <div class="main-content container-fluid">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="page-title ">
-                    <h3>Rumah</h3>
-                    <p class="text-subtitle text-muted">Daftar rumah untuk dijual</p>
-                </div>
-                <div class="">
-                    <a href="/admin/houses/create" class="btn btn-sm btn-primary">Tambah Rumah</a>
+                    <h3>Rumah Saya</h3>
+                    <p class="text-subtitle text-muted">Menu khusus untuk pemiliki rumah di TitaResidence</p>
                 </div>
             </div>
 
@@ -24,33 +21,25 @@
                                 <thead>
                                     <tr>
                                         <th>Model Rumah</th>
-                                        <th>Harga Perbulan</th>
-                                        <th>Jumlah Kamar</th>
-                                        <th>Jumlah Kamar Mandi</th>
-                                        <th>Ukuran</th>
-                                        <th>Status</th>
+                                        <th>Status Kepemilikan</th>
+                                        <th>Status Rumah</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($houses as $house)
+                                    @foreach ($owners as $owner)
                                         <tr>
-                                            <td><a class="fw-bold" href="#" onclick="showImage('{{ $house->model }}', '{{ $house->image }}')">{{ $house->model }}</a></td>
-                                            <td>{{ formatCurrency($house->price) }}</td>
-                                            <td>{{ $house->bedrooms }}</td>
-                                            <td>{{ $house->bathrooms }}</td>
-                                            <td>{{ $house->size }} Meter Persegi</td>
-                                            <td><span
-                                                    class="badge {{ $house->status == 'Dijual' ? 'bg-dark' : 'bg-warning' }}">{{ $house->status }}</span>
-                                            </td>
+                                            <td>{{ $owner->house->model }}</td>
+                                            <td>{{ $owner->status }}</td>
+                                            <td>{{ $owner->house->status }}</td>
                                             <td>
-                                                <a href="/admin/houses/{{ $house->id }}/edit"
-                                                    class="btn btn-sm btn-warning py-1 px-2"><i data-feather="edit"
-                                                        class="text-white"></i></a>
-                                                <button type="button" data-bs-target="#deleteModal" data-bs-toggle="modal"
-                                                    data-id="{{ $house->id }}" data-model="{{ $house->model }}"
-                                                    class="  btn-delete btn btn-sm btn-danger py-1 px-2"><i
-                                                        data-feather="trash" class="text-white"></i></button>
+                                                @if ($owner->house->status == 'Dibeli')
+                                                    <a href="/customer/rent-out/{{ $owner->id }}"
+                                                        class="btn btn-sm btn-success px-2 py-1">Sewakan</a>
+                                                @else
+                                                    <a href="/customer/cancel-rent/{{ $owner->id }}"
+                                                        class="btn btn-sm btn-danger px-2 py-1">Batal Sewakan</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
