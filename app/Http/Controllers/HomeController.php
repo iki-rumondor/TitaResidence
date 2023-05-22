@@ -11,8 +11,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index', [
-            'title' => 'iPagar'
+        return view('home', [
+            'title' => 'HomePage'
         ]);
     }
 

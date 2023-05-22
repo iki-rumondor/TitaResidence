@@ -24,16 +24,17 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $request['phone_num'] =   formatPhoneNumber($request['phone_num']);
+        
         $validatedData = $request->validate([
             "username" => "required|min:8|max:20|unique:users",
             "password" => "required|min:8|max:255",
             "password_confirm" => "required|min:8|max:255|same:password",
-            "phone_num" => "required"
+            "phone_num" => "required|unique:users"
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['level'] = "Basic";
-        $validatedData['phone_num'] =   formatPhoneNumber($validatedData['phone_num']);
 
         $user = User::create($validatedData);
         $user->assignRole('customer');
