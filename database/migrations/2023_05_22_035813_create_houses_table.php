@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->integer('size');
-            $table->string('images');
+            $table->string('image');
             $table->string('status');
             $table->timestamps();
         });

@@ -15,15 +15,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <style>
-        .btn a{
-            color: white
-        }
-        .btn:hover{
-            color: black
-        }
-    </style>
 </head>
 
 <body>
