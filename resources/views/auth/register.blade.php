@@ -13,7 +13,7 @@
                         <form action="/auth/register" method="post">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="username">Username</label>
                                         <input value="{{ old('username') }}" type="text" id="username"
@@ -26,7 +26,18 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="phone_num">Nomor Hp</label>
+                                        <input value="{{ old('phone_num') }}" type="text" id="phone_num"
+                                            class="form-control @error('phone_num') is-invalid @endError" name="phone_num"
+                                            placeholder="Masukkan Nomor Handphone">
+                                        @error('phone_num')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" id="password"
@@ -39,18 +50,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="phone_num">Nomor Hp</label>
-                                        <input value="{{ old('phone_num') }}" type="text" id="phone_num"
-                                            class="form-control @error('phone_num') is-invalid @endError" name="phone_num"
-                                            placeholder="Masukkan Nomor Handphone">
-                                        @error('phone_num')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="password_confirm">Konfirmasi Password</label>
                                         <input type="password" id="password_confirm"

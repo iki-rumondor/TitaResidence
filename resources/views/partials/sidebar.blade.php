@@ -27,16 +27,16 @@
                     </li>
                 @else
                     <li class='sidebar-title'>Admin</li>
-                    <li class="sidebar-item {{ Request::is('admin') ? 'active' : '' }}">
-                        <a href="/admin" class='sidebar-link'>
-                            <i data-feather="send" width="20"></i>
-                            <span>Pesanan</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item {{ Request::is('admin/customers*') ? 'active' : '' }}">
                         <a href="/admin/customers" class='sidebar-link'>
                             <i data-feather="users" width="20"></i>
                             <span>Pelanggan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{ Request::is('admin/houses*') ? 'active' : '' }}">
+                        <a href="/admin/houses" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Rumah</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ Request::is('admin/complaints*') ? 'active' : '' }}">
