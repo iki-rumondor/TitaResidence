@@ -55,7 +55,7 @@ class AuthController extends Controller
             if ($credentials['username'] == 'admin') {
                 return redirect()->intended('/admin')->with('success', 'Selamat datang Admin');
             } else {
-                return redirect()->intended('/customer')->with('success', 'Selamat datang Admin');
+                return redirect()->intended('/')->with('success', 'Selamat datang Admin');
             }
         }
     }

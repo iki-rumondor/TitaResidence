@@ -113,6 +113,18 @@
         </script>
     @endif
 
+    @if (session()->has('fail'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: "{{ session('fail') }}",
+            showConfirmButton: false,
+            timer: 3000
+        })
+    </script>
+@endif
+
     @stack('scripts')
 </body>
 

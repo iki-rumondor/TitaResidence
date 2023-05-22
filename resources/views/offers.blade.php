@@ -8,49 +8,35 @@
         <div class="main-content container-fluid">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="page-title ">
-                    <h3>Rumah</h3>
-                    <p class="text-subtitle text-muted">Daftar rumah untuk dijual</p>
-                </div>
-                <div class="">
-                    <a href="/admin/houses/create" class="btn btn-sm btn-primary">Tambah Rumah</a>
+                    <h3>Penawaran Rumah</h3>
+                    <p class="text-subtitle text-muted">Daftar penawaran rumah oleh pelanggan</p>
                 </div>
             </div>
 
             <div class="row">
-                <div class="card">
+                <div class="card col-lg-6">
                     <div class="card-body px-0 pb-0">
                         <div class="table-responsive" style="max-height:420px">
                             <table class="table mb-0" id="table1">
                                 <thead>
                                     <tr>
+                                        <th>Pelanggan</th>
                                         <th>Model Rumah</th>
-                                        <th>Harga Perbulan</th>
-                                        <th>Jumlah Kamar</th>
-                                        <th>Jumlah Kamar Mandi</th>
-                                        <th>Ukuran</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($houses as $house)
+                                    @foreach ($offers as $offer)
                                         <tr>
-                                            <td><a class="fw-bold" href="#" onclick="showImage('{{ $house->model }}', '{{ $house->image }}')">{{ $house->model }}</a></td>
-                                            <td>{{ $house->price }}</td>
-                                            <td>{{ $house->bedrooms }}</td>
-                                            <td>{{ $house->bathrooms }}</td>
-                                            <td>{{ $house->size }} Meter Persegi</td>
+                                            <td>{{ $offer->user->username }}</td>
+                                            <td>{{ $offer->house->model }}</td>
                                             <td><span
-                                                    class="badge {{ $house->status == 'Dijual' ? 'bg-dark' : 'bg-warning' }}">{{ $house->status }}</span>
+                                                    class="badge {{ $offer->status == 'Membeli' ? 'bg-dark' : 'bg-warning' }}">{{ $offer->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="/admin/houses/{{ $house->id }}/edit"
-                                                    class="btn btn-sm btn-warning py-1 px-2"><i data-feather="edit"
-                                                        class="text-white"></i></a>
-                                                <button type="button" data-bs-target="#deleteModal" data-bs-toggle="modal"
-                                                    data-id="{{ $house->id }}" data-model="{{ $house->model }}"
-                                                    class="  btn-delete btn btn-sm btn-danger py-1 px-2"><i
-                                                        data-feather="trash" class="text-white"></i></button>
+                                                <a class="btn btn-sm btn-success" href="/admin/accept-offer/{{ $offer->id }}">Terima</a>
+                                                <a class="btn btn-sm btn-danger" href="/admin/deny-offer/{{ $offer->id }}">Tolak</a>
                                             </td>
                                         </tr>
                                     @endforeach

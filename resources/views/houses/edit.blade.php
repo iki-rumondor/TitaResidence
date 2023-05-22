@@ -8,8 +8,8 @@
         <div class="main-content container-fluid">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="page-title ">
-                    <h3>Tambah Rumah</h3>
-                    <p class="text-subtitle text-muted">Tambah rumah untuk dijual</p>
+                    <h3>Edit Data Rumah</h3>
+                    <p class="text-subtitle text-muted">Edit data rumah untuk dijual</p>    
                 </div>
                 <div class="">
                     <a href="/admin/houses" class="btn btn-sm btn-dark">Kembali</a>
@@ -20,15 +20,17 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/admin/houses" method="post" class="form form-vertical"
+                            <form action="/admin/houses/{{ $house->id }}" method="post" class="form form-vertical"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @method('patch')
                                 <div class="form-body">
                                     <div class="form-group has-icon-left">
                                         <label for="model">Model Rumah</label>
                                         <div class="position-relative">
                                             <input type="text" class="form-control @error('model') is-invalid @enderror"
-                                                placeholder="Masukkan Model Rumah" id="model" name="model" value="{{ old('model') }}">
+                                                placeholder="Masukkan Model Rumah" id="model" name="model"
+                                                value="{{ old('model', $house->model) }}">
                                             <div class="form-control-icon">
                                                 <i data-feather="home"></i>
                                             </div>
@@ -44,7 +46,8 @@
                                             <div class="position-relative">
                                                 <input min="0" type="number"
                                                     class="form-control @error('price') is-invalid @enderror"
-                                                    placeholder="Masukkan Harga Rumah" id="price" name="price" value="{{ old('price') }}">
+                                                    placeholder="Masukkan Harga Rumah" id="price" name="price"
+                                                    value="{{ old('price', $house->price) }}">
                                                 <div class="form-control-icon">
                                                     <i data-feather="dollar-sign"></i>
                                                 </div>
@@ -59,7 +62,8 @@
                                             <div class="position-relative">
                                                 <input min="0" type="number"
                                                     class="form-control @error('size') is-invalid @enderror"
-                                                    placeholder="Masukkan Ukuran Rumah" id="size" name="size" value="{{ old('size') }}">
+                                                    placeholder="Masukkan Ukuran Rumah" id="size" name="size"
+                                                    value="{{ old('size', $house->size) }}">
                                                 <div class="form-control-icon">
                                                     <i data-feather="crop"></i>
                                                 </div>
@@ -76,7 +80,8 @@
                                             <div class="position-relative">
                                                 <input min="0" type="number"
                                                     class="form-control @error('bedrooms') is-invalid @enderror"
-                                                    placeholder="Masukkan Jumlah Kamar" id="bedrooms" name="bedrooms" value="{{ old('bedrooms') }}">
+                                                    placeholder="Masukkan Jumlah Kamar" id="bedrooms" name="bedrooms"
+                                                    value="{{ old('bedrooms', $house->bedrooms) }}">
                                                 <div class="form-control-icon">
                                                     <i data-feather="package"></i>
                                                 </div>
@@ -92,7 +97,7 @@
                                                 <input min="0" type="number"
                                                     class="form-control @error('bathrooms') is-invalid @enderror"
                                                     placeholder="Masukkan Jumlah Kamar Mandi" id="bathrooms"
-                                                    name="bathrooms" value="{{ old('bathrooms') }}">
+                                                    name="bathrooms" value="{{ old('bathrooms', $house->bathrooms) }}">
                                                 <div class="form-control-icon">
                                                     <i data-feather="user"></i>
                                                 </div>
@@ -106,8 +111,8 @@
                                     <div class="form-group col-sm-3 mb-4">
                                         <label for="image">Pilih Gambar Rumah</label>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="image" name="image" onchange="previewImage()" value="{{ old('image') }}">
-                                        <img id="img-preview" class="img-fluid w-100">
+                                            id="image" name="image" onchange="previewImage()">
+                                        <img id="img-preview" class="img-fluid w-100" src="{{ asset('storage/'.$house->image) }}">
                                         @error('image')
                                             <div class="small text-danger">{{ $message }}</div>
                                         @enderror
@@ -115,7 +120,7 @@
 
 
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Tambahkan</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Update</button>
                                     </div>
 
                                 </div>

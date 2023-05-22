@@ -11,7 +11,7 @@
                 <a href="#" data-bs-toggle="dropdown"
                     class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="avatar me-1">
-                        <img src="{{ asset('admin_assets/images/avatar/avatar-s-1.png') }}" alt="" srcset="">
+                        <img src="{{ asset('admin_assets/images/avatar/avatar-s-2.png') }}" alt="" srcset="">
                     </div>
                     <div class="d-none d-md-block d-lg-inline-block">{{ auth()->user()->username }}</div>
                 </a>

@@ -17,11 +17,55 @@
         rel="stylesheet">
 
     <style>
-        .btn a{
-            color: white
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        .btn:hover{
-            color: black
+
+        .dropdown-toggle {
+            color: #333;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-toggle i {
+            margin-left: 5px;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: transparent;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: hsl(200, 69%, 14%);
+            ;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            width: 200px;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px 10px;
+        }
+
+        .dropdown-menu li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: hsl(200, 71%, 39%);
+            ;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
         }
     </style>
 </head>
@@ -42,7 +86,35 @@
     <script src="assets/js/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownToggle = document.querySelector('.dropdown-toggle');
+            var dropdown = document.querySelector('.dropdown');
 
+            dropdownToggle.addEventListener('click', function() {
+                dropdown.classList.toggle('active');
+            });
+
+
+
+        });
+    </script>
+    @if (session()->has('fail'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: "{{ session('fail') }}",
+                showConfirmButton: false,
+                timer: 3000
+            })
+        </script>
+    @endif
 </body>
 
 </html>
