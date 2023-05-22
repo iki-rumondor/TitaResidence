@@ -18,10 +18,10 @@
                             <table class="table mb-0" id="table1">
                                 <thead>
                                     <tr>
+                                        <th>Nomor</th>
                                         <th>Nama Pelanggan</th>
                                         <th>Nomor Handphone</th>
-                                        <th>Jumlah Order Berhasil</th>
-                                        <th>Level Customer</th>
+                                        <th>Jumlah Rumah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,10 +30,9 @@
                                             @continue
                                         @endif
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $customer->username }}</td>
                                             <td>{{ $customer->phone_num }}</td>
-                                            <td>{{ $customer->orders->where('status', 'Selesai')->count() }}</td>
-                                            <td>{{ $customer->level }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

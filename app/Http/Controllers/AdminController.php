@@ -3,27 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complaint;
+use App\Models\House;
+use App\Models\Offer;
 use App\Models\Order;
+use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+
+    public function viewOffers()
     {
-        return view('orders', [
-            'title' => 'Order Jasa',
-            'orders' => Order::where('status', 'Disetujui')->orWhere('status', 'Diajukan')->get(),
+        return view('offers', [
+            'title' => 'Penawaran Rumah',
+            'offers' => Offer::all(),
         ]);
     }
 
-    public function verifyOrder(Order $order)
+    public function verifyOffer(Offer $offer)
     {
-        $order->update(['status' => 'Disetujui']);
-        $phone_num = $order->user->phone_num;
-        $body = \sprintf("Permintaan jasa %s anda sudah kami terima, tim iPagar akan datang ke rumah anda sesuai dengan alamat : %s (%s) pada tanggal: %s", $order->service, $order->address, $order->desa, $order->req_date);
-        $response = response('<script>window.open("https://api.whatsapp.com/send?phone=' . $phone_num . '&text=' . $body . '", "_blank");</script>', 200, ['Content-Type', 'text/html']);
-        return back()->with('response', $response);
+        Owner::create([
+            'user_id' => $offer->user->id,
+            'house_id' => $offer->house->id,
+            'status' => $offer->status,
+        ]);
+
+        $offer->delete();
+
+        return back()->with('success', 'Berhasil memverifikasi penawaran');
+    }
+
+    public function denyOffer(Offer $offer)
+    {
+        $offer->delete();
+
+        return back()->with('success', 'Berhasil membatalkan penawaran');
     }
 
     public function denyOrder(Order $order)

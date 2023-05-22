@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class House extends Model
+class Offer extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
-    public function offers()
+    
+    public function user()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function owner()
+    public function house()
     {
-        return $this->hasOne(Owner::class);
+        return $this->belongsTo(House::class);
     }
 }

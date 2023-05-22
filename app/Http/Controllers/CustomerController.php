@@ -2,46 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Complaint;
+use App\Models\House;
 use App\Models\Order;
+use App\Models\Complaint;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
 
-    protected $services = [
-        'Pembuatan Pagar',
-        'Pemasangan Pengaman Jendela',
-        'Pengelasan',
-    ];
-
-    protected $desa = [
-        'Biyonga',
-        'Bolihuangga',
-        'Bongohulawa',
-        'Bulota',
-        'Dutulanaa',
-        'Hepuhulawa',
-        'Hunggaluwa',
-        'Hutuo',
-        'Kayubulan',
-        'Kayumerah',
-        'Malahu',
-        'Polohungo',
-        'Tenilo',
-        'Tilihuwa'
-    ];
-
-
-    public function index()
+    public function viewOffering()
     {
 
-        return view('ordering', [
-            'title' => 'Order Jasa',
-            'services' => $this->services,
-            'desa' => $this->desa,
-            'orders' => auth()->user()->orders,
+        return view('offering', [
+            'title' => 'Penawaran Rumah',
+            'offers' => Offer::where('user_id', \auth()->user()->id)->get()
         ]);
+    }
+
+    public function setOffer(House $house)
+    {
+
+        if(Offer::where('user_id', \auth()->user()->id)->first()){
+            return back()->with('fail', 'Maaf status penawaran anda masih belum dikonfirmasi, harap selesaikan satu penawaran untuk mengajukan penawaran lagi');
+        }
+
+        $status = $house->status == 'Dijual' ? 'Membeli' : 'Menyewa';
+
+        Offer::create([
+            'user_id' => \auth()->user()->id,
+            'house_id' => $house->id,
+            'status' => $status,
+        ]);
+
+        return \redirect('/customer/offering')->with('success', 'Berhasil mengajukan penawaran');
     }
 
     public function order(Request $request)
@@ -65,16 +59,6 @@ class CustomerController extends Controller
     {
         return view('warranty', [
             'title' => 'Order Jasa',
-            'orders' => auth()->user()->orders->where('status', 'Selesai'),
-        ]);
-    }
-
-    public function viewGallery()
-    {
-        return view('gallery', [
-            'title' => 'Rekomendasi Produk',
-            'services' => $this->services,
-            'desa' => $this->desa,
             'orders' => auth()->user()->orders->where('status', 'Selesai'),
         ]);
     }

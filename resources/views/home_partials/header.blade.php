@@ -91,33 +91,25 @@
 
             </nav>
 
-            {{-- <div class="header-bottom-actions">
+            <div class="header-bottom-actions">
 
-                <button class="header-bottom-actions-btn" aria-label="Search">
-                    <ion-icon name="search-outline"></ion-icon>
+                @role('customer')
+                    <div class="dropdown">
+                        <button style="display: flex; align-items: center;" class="dropdown-toggle" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span style="margin-inline-end: 5px">{{ auth()->user()->username }}</span>
+                            <ion-icon name="caret-down-outline"></ion-icon>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/customer/offering">Penawaran Saya</a></li>
+                            <li><a href="/customer/house">Rumah Saya</a></li>
+                            <hr>
+                            <li><a href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                @endrole('customer')
 
-                    <span>Search</span>
-                </button>
-
-                <button class="header-bottom-actions-btn" aria-label="Profile">
-                    <ion-icon name="person-outline"></ion-icon>
-
-                    <span>Profile</span>
-                </button>
-
-                <button class="header-bottom-actions-btn" aria-label="Cart">
-                    <ion-icon name="cart-outline"></ion-icon>
-
-                    <span>Cart</span>
-                </button>
-
-                <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
-                    <ion-icon name="menu-outline"></ion-icon>
-
-                    <span>Menu</span>
-                </button>
-
-            </div> --}}
+            </div>
 
         </div>
     </div>

@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
                 if (auth()->user()->getRoleNames()->first() == 'admin') {
                     return redirect('/admin');
                 } elseif (auth()->user()->getRoleNames()->first() == 'customer') {
-                    return redirect('/customer');
+                    return redirect('/');
                 }
             }
         }

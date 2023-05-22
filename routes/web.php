@@ -31,7 +31,9 @@ Route::middleware('guest')->group(function(){
 
 
 Route::prefix('customer')->middleware(['role:customer'], 'auth')->group(function () {
-    Route::get('', [CustomerController::class, 'index'] );
+    Route::get('', [HomeController::class, 'index'] );
+    Route::get('offering', [CustomerController::class, 'viewOffering'] );
+    Route::get('setOffer/{house}', [CustomerController::class, 'setOffer'] );
     Route::get('warranty', [CustomerController::class, 'viewWarranty'] );
     Route::get('gallery', [CustomerController::class, 'viewGallery'] );
     Route::post('order', [CustomerController::class, 'order'] );
@@ -39,11 +41,13 @@ Route::prefix('customer')->middleware(['role:customer'], 'auth')->group(function
 });
 
 Route::prefix('admin')->middleware(['role:admin'], 'auth')->group(function () {
-    Route::get('', [AdminController::class, 'index'] );
-    Route::get('verify-order/{order}', [AdminController::class, 'verifyOrder'] );
-    Route::get('deny-order/{order}', [AdminController::class, 'denyOrder'] );
-    Route::get('finish-order/{order}', [AdminController::class, 'finishOrder'] );
+    Route::get('', [AdminController::class, 'viewCustomers'] );
     Route::get('customers', [AdminController::class, 'viewCustomers'] );
+    Route::get('offers', [AdminController::class, 'viewOffers'] );
+    Route::get('accept-offer/{offer}', [AdminController::class, 'verifyOffer'] );
+    Route::get('deny-offer/{offer}', [AdminController::class, 'denyOffer'] );
+
+    Route::get('finish-order/{order}', [AdminController::class, 'finishOrder'] );
     Route::get('complaints', [AdminController::class, 'viewComplaints'] );
     Route::get('finish-complaint/{complaint}', [AdminController::class, 'finishComplaint'] );
 

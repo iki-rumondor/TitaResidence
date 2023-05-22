@@ -20,11 +20,6 @@
                         Investasikan masa depan Anda dengan membeli rumah impian sesuai kebutuhan dan keinginan Anda, serta nikmati manfaat stabilitas keuangan jangka panjang.
                     </p>
 
-                    <a href="#" class="card-link">
-                        <span>Cari Perumahan</span>
-
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </a>
 
                 </div>
             </li>
@@ -44,11 +39,6 @@
                         Temukan rumah berkualitas yang dapat disewa serta nikmati fleksibilitas dan kenyamanan tinggal di lingkungan yang sesuai dengan gaya hidup Anda.
                     </p>
 
-                    <a href="#" class="card-link">
-                        <span>Cari Perumahan</span>
-
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </a>
 
                 </div>
             </li>
@@ -68,11 +58,6 @@
                         Jual rumah Anda dengan mudah dan dapatkan harga terbaik serta manfaatkan bantuan kami untuk mencapai calon pembeli potensial.
                     </p>
 
-                    <a href="#" class="card-link">
-                        <span>Cari Perumahan</span>
-
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </a>
 
                 </div>
             </li>

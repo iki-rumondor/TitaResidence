@@ -6,28 +6,28 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 @role('customer')
-                    <li class='sidebar-title'>Customer</li>
+                    <li class='sidebar-title'>Pelanggan</li>
                     <li class="sidebar-item {{ Request::is('customer') ? 'active' : '' }}">
                         <a href="/customer" class='sidebar-link'>
                             <i data-feather="send" width="20"></i>
-                            <span>Order Jasa</span>
+                            <span>Penawaran Anda</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ Request::is('customer/warranty') ? 'active' : '' }}">
                         <a href="/customer/warranty" class='sidebar-link'>
                             <i data-feather="slack" width="20"></i>
-                            <span>Garansi iPagar</span>
+                            <span>Rumah Anda</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Request::is('customer/gallery') ? 'active' : '' }}">
-                        <a href="/customer/gallery" class='sidebar-link'>
-                            <i data-feather="check-square" width="20"></i>
-                            <span>Rekomendasi Produk</span>
+                    <li class="sidebar-item {{ Request::is('customer/warranty') ? 'active' : '' }}">
+                        <a href="/#property" class='sidebar-link'>
+                            <i data-feather="send" width="20"></i>
+                            <span>Lihat Rumah Lain</span>
                         </a>
                     </li>
                 @else
                     <li class='sidebar-title'>Admin</li>
-                    <li class="sidebar-item {{ Request::is('admin/customers*') ? 'active' : '' }}">
+                    <li class="sidebar-item {{ Request::is('admin', 'admin/customers*') ? 'active' : '' }}">
                         <a href="/admin/customers" class='sidebar-link'>
                             <i data-feather="users" width="20"></i>
                             <span>Pelanggan</span>
@@ -39,10 +39,10 @@
                             <span>Rumah</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ Request::is('admin/complaints*') ? 'active' : '' }}">
-                        <a href="/admin/complaints" class='sidebar-link'>
-                            <i data-feather="refresh-ccw" width="20"></i>
-                            <span>Keluhan Pelanggan</span>
+                    <li class="sidebar-item {{ Request::is('admin/offers*') ? 'active' : '' }}">
+                        <a href="/admin/offers" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Penawaran</span>
                         </a>
                     </li>
                 @endrole
